@@ -1,0 +1,13 @@
+{
+	"id" : "folder-to-datasets",
+	"version" : "0.0.1",
+	"meta" : {
+		"label" : "Folder to datasets",
+		"description" : "Parse a folder to create datasets with the files in the folder",
+		"author" : "Dataiku (Maxime Mouchet)",
+		"icon" : "icon-puzzle-piece",
+		"licenseInfo" : "Apache Software License",
+		"url" : "https://www.dataiku.com",
+		"tags" : ["Useful", "Create Dataset","Folder"]
+	}
+}

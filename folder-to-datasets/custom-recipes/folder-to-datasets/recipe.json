@@ -1,0 +1,37 @@
+{
+  "meta" : {
+    "label" : "folder-to-datasets",
+    "description": "Parse a folder to create datasets with the files in the folder",
+    "author" : "Dataiku (Maxime Mouchet)",
+    "tags" : ["Useful", "Create Dataset","Folder"]
+  },
+  "kind" : "PYTHON",
+  "inputRoles" : [
+    {
+      "name": "folder_to_parse",
+      "label": "Folder to parse",
+      "arity": "UNARY",
+      "required": true,
+      "acceptsManagedFolder": true,
+      "description": "Folder containing the file(s) to change into dataset(s)"
+    }
+  ],
+  "outputRoles" : [
+    {
+      "name": "verification_dataset",
+      "label": "Verification dataset",
+      "arity": "UNARY",
+      "required": false,
+      "acceptsDataset": true,
+      "description": "Dataset containing informations on how the extraction went"
+    }
+  ],
+  "params": [
+    {
+      "name": "api_key",
+      "label": "api_key",
+      "type": "STRING",
+      "description":"Go to administration/security/API keys and create one for the project"
+    }
+  ]
+}
