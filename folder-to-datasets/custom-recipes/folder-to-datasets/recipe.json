@@ -25,13 +25,5 @@
       "acceptsDataset": true,
       "description": "Dataset containing informations on how the extraction went"
     }
-  ],
-  "params": [
-    {
-      "name": "api_key",
-      "label": "api_key",
-      "type": "STRING",
-      "description":"Go to administration/security/API keys and create one for the project"
-    }
   ]
 }

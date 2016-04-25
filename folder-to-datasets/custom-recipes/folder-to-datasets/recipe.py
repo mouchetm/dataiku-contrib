@@ -5,12 +5,45 @@ import pandas as pd, numpy as np
 import socket
 from dataikuapi.dssclient import DSSClient
 from dataiku.customrecipe import *
+import subprocess
 
 input_folder = dataiku.Folder(get_input_names_for_role('folder_to_parse')[0])
-api_key = get_recipe_config()['api_key']
 project_name = dataiku.get_custom_variables()["projectKey"]
 dip_home = dataiku.get_custom_variables()["dip.home"]
 port_file = dip_home + '/bin/env-default.sh'
+
+#Let's create an api_key if it does not exist
+
+def retrieve_api_key():
+    api_keys_dir = '/config/public-apikeys.json'
+    with open(dip_home+api_keys_dir) as data_file:
+        data_ = json.load(data_file)
+    existing = False
+    api_key = None
+    for key in data_:
+        try :
+            if (key['createdBy'] == 'CLI' and key['globalAdmin'] == True and key['label'] == 'Added by dku command-line'):
+                existing = False
+                api_key = key['key']
+                break
+        except KeyError:
+            pass
+    return [existing, api_key]
+
+
+def create_api_key():
+    command = '/bin/dku'
+    subprocess.Popen([dip_home+command, 'add-admin-api-key', '78'])
+    print 'creating API key'
+    return 'Done'
+
+test_api_key = retrieve_api_key()
+if test_api_key[0] == True:
+    api_key = test_api_key[1]
+else :
+    create_api_key()
+    api_key = retrieve_api_key()[1]
+
 
 with open(port_file, 'r') as f:
     read_data = f.read()
